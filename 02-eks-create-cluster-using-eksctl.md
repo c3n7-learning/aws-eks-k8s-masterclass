@@ -1,4 +1,4 @@
-# Section 2: EKS - Create Cluster using `eksctl`
+# Section 02: EKS - Create Cluster using `eksctl`
 
 ## 04. Introduction
 
