@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: deployment-nodeport-service
+spec:
+  type: NodePort
+  selector: # load balance traffic across pods matching this selector
+    app: myapp3
+  ports: # access traffic sent on port 80
+    - name: http
+      port: 80 # service port
+      targetPort: 80 # container port
+      nodePort: 30020 # nodeport

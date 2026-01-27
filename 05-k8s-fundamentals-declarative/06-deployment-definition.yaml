@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp3-deployment
+spec:
+  replicas: 3 # 3 pods should exists at all times
+  selector: # pods label should be defined in Deployment label selector
+    matchLabels:
+      app: myapp3
+  template:
+    metadata:
+      name: myapp3-pod
+      labels:
+        app: myapp3 # atleast 1 pod label should match with the Deployment label selector
+    spec:
+      containers:
+        - name: myapp3
+          image: stacksimplify/kubenginx:3.0.0
+          ports:
+            - containerPort: 80
