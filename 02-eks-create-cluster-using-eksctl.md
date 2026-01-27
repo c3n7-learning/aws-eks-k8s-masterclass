@@ -120,7 +120,7 @@ There are four core objects in an EKS Cluster:
 
 ### 08.1 How does EKS Work?
 
-![eks-basics](media/02-eks-basics.webp)
+![eks-basics](media/02-1-eks-basics.webp)
 
 1. We first provision our EKS cluster using `eksctl`
 2. Deploy worker nodes and add them to our cluster using `eksctl`
@@ -167,7 +167,7 @@ There are four core objects in an EKS Cluster:
 Let's create the cluster using the `eksctl` CLI. this may take 15 to 20 minutes. Add `--without-nodegroup` as without this option, `eksctl` will automatically create nodes in the cluster. We want to do this separately:
 
 ```shell
-eks create cluster --name=eksdemo1 \
+eksctl create cluster --name=eksdemo1 \
                    --region=us-east-1 \
                    --zones=us-east-1a,us-east-1b \
                    --without-nodegroup
@@ -413,8 +413,8 @@ eksctl get nodegroup --cluster=<clusterName>
 eksctl get nodegroup --cluster=eksdemo1
 
 # Delete Node Group
-eksctl delete nodegroup --cluster=<clusterName> --name=<nodegroupName>
-eksctl delete nodegroup --cluster=eksdemo1 --name=eksdemo1-ng-public1
+eksctl delete nodegroup --cluster=<clusterName> --name=<nodegroupName> --disable-eviction
+eksctl delete nodegroup --cluster=eksdemo1 --name=eksdemo1-ng-public1 --disable-eviction
 ```
 
 We can delete the cluster using `eksctl delete cluster`:
