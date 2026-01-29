@@ -21,13 +21,13 @@ Network Design with ALB Default Backend:
 
 - The default backend will route traffic via the ALB and the default backend will in turn route it to the NodePort service of your app.
 
-![default backend](../media/12-default-backend.png)
+![default backend](../media/12-1-default-backend.png)
 
 Network Design with ALB Ingress Rules:
 
 - You can route multiple resources (nodeport services) via target rules in your ALB
 
-![default backend](../media/13-ingress-rules.png)
+![default backend](../media/12-2-ingress-rules.png)
 
 ## 97. Review Kubernetes Deployment and NodePort Service manifest
 
