@@ -74,6 +74,8 @@ The controller manages the configurations of the resources it creates, and we do
 1. The controller watches for ingress events from the API server. When it finds ingress resources that satisfy its requirements, it begins the creation of AWS resources.
 2. An ALB (ELBv2) is created in AWS for the new ingress resource. This ALB can be internet-facing or internal. You can also specify the subnets it's created in using annotations.
 3. Target Groups are created in AWS for each unique Kubernetes service described in the ingress resource.
+   - `PodC` works with Traffic Mode: IP. Good to apply in fargate.
+   - `PodA` and `PodB` work with Traffic Mode: Instance
 4. Listeners are created for every port detailed in your ingress resource annotations. When no port is specified, sensible defaults (80 or 443) are used. Certificates may also be attached via annotations.
 5. Rules are created for each path specified in your ingress resource. This ensures traffic to a specific path is routed to the correct Kubernetes Service.
 
