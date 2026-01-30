@@ -2,11 +2,11 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-ssl-demo
+  name: ingress-namebasedvhost-demo
   labels:
-    app: ingress-ssl-demo
+    app: ingress-namebasedvhost-demo
   annotations:
-    alb.ingress.kubernetes.io/load-balancer-name: ssl-ingress
+    alb.ingress.kubernetes.io/load-balancer-name: namebasedvhost-ingress
     # Ingress Core
     alb.ingress.kubernetes.io/scheme: internet-facing
     # Health Check Settings
@@ -24,6 +24,8 @@ metadata:
     #alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-TLS-1-1-2017-01 #Optional (Picks default if not used)
     # SSL Redirect Setting
     alb.ingress.kubernetes.io/ssl-redirect: "443"
+    # External DNS - For creating a Record Set in Route53
+    external-dns.alpha.kubernetes.io/hostname: default101.timothykarani.com
 spec:
   ingressClassName: my-aws-ingress-class # Ingress class
   defaultBackend:
@@ -32,7 +34,8 @@ spec:
       port:
         number: 80
   rules:
-    - http:
+    - host: app101.timothykarani.com
+      http:
         paths:
           - path: /app1
             pathType: Prefix
@@ -41,6 +44,9 @@ spec:
                 name: app1-nginx-nodeport-service
                 port:
                   number: 80
+    - host: app201.timothykarani.com
+      http:
+        paths:
           - path: /app2
             pathType: Prefix
             backend:
