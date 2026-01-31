@@ -1,0 +1,8 @@
+provider:
+  name: aws
+serviceAccount:
+  eks.amazonaws.com/role-arn: arn:aws:iam::662513131574:role/AWSPodIdentityExternalDns
+policy: sync
+env:
+  - name: AWS_DEFAULT_REGION
+    value: us-east-1 # change to region where EKS is installed
