@@ -12,7 +12,7 @@
 - **IP Mode** will route traffic **directly** to the **pod IP**.
   - Is required for **sticky sessions** to work with Application Load Balancers.
   - Fargate only works with this
-  - You ned to explicitly define the annotation as `target-type: ip`
+  - You need to explicitly define the annotation as `target-type: ip`
   - `alb.ingress.kubernetes.io/target-type: ip`
 
 ## 124. Implement Ingress Target Type IP Mode
