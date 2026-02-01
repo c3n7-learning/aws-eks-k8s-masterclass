@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubeapp-ecr
+  labels:
+    app: kubeapp-ecr
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: kubeapp-ecr
+  template:
+    metadata:
+      labels:
+        app: kubeapp-ecr
+    spec:
+      containers:
+        - name: kubeapp-ecr
+          image: 662513131574.dkr.ecr.us-east-1.amazonaws.com/aws-ecr-kubenginx:1.0.0
+          ports:
+            - containerPort: 80
