@@ -1,0 +1,60 @@
+# Annotations Reference: https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/ingress/annotations/
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-cloudflare-acm-demo
+  labels:
+    app: ingress-cloudflare-acm-demo
+  annotations:
+    alb.ingress.kubernetes.io/load-balancer-name: cloudflare-acm-ingress
+    # Ingress Core
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    # Health Check Settings
+    # If you have multiple targets in the ingress, move this health check to the NodePort service
+    alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
+    alb.ingress.kubernetes.io/healthcheck-port: traffic-port
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: "15"
+    alb.ingress.kubernetes.io/healthcheck-timeout-seconds: "5"
+    alb.ingress.kubernetes.io/success-codes: "200"
+    alb.ingress.kubernetes.io/healthy-threshold-count: "2"
+    alb.ingress.kubernetes.io/unhealthy-threshold-count: "2"
+    ## SSL Settings
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:662513131574:certificate/dde97232-17ce-4580-9824-44618e4b6775
+    #alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-TLS-1-1-2017-01 #Optional (Picks default if not used)
+    # SSL Redirect Setting
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
+
+    # External DNS - For creating a Record Set in Cloudflare
+    # https://kubernetes-sigs.github.io/external-dns/latest/docs/tutorials/cloudflare/#deploying-an-nginx-service
+    external-dns.alpha.kubernetes.io/hostname: default403.karanimwenda.com
+    external-dns.alpha.kubernetes.io/ttl: "300" #optional
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+spec:
+  ingressClassName: my-aws-ingress-class # Ingress class
+  defaultBackend:
+    service:
+      name: app3-nginx-nodeport-service
+      port:
+        number: 80
+  rules:
+    - host: app401.karanimwenda.com
+      http:
+        paths:
+          - path: /app1
+            pathType: Prefix
+            backend:
+              service:
+                name: app1-nginx-nodeport-service
+                port:
+                  number: 80
+    - host: app402.karanimwenda.com
+      http:
+        paths:
+          - path: /app2
+            pathType: Prefix
+            backend:
+              service:
+                name: app2-nginx-nodeport-service
+                port:
+                  number: 80
