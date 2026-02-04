@@ -206,7 +206,7 @@ I0607 09:14:47.804401       1 pre_filtering_processor.go:66] Skipping ip-192-168
 I0607 09:14:47.804460       1 static_autoscaler.go:440] Scale down status: unneededOnly=true lastScaleUpTime=2020-06-07 09:12:27.367461648 +0000 UTC m=+37.138078060 lastScaleDownDeleteTime=2020-06-07 09:12:27.367461724 +0000 UTC m=+37.138078135 lastScaleDownFailTime=2020-06-07 09:12:27.367461801 +0000 UTC m=+37.138078213 scaleDownForbidden=false isDeleteInProgress=false scaleDownInCooldown=true
 ```
 
-### 197. Load Test, Verify Cluster Worker Nodes Scale-Up and Scale-In
+## 197. Load Test, Verify Cluster Worker Nodes Scale-Up and Scale-In
 
 Deploy simple Application
 
